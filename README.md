@@ -9,6 +9,7 @@ This script automatically renames files in a directory with sequential dates and
 - Skips files that already match the naming pattern
 - Handles file extensions automatically
 - Prevents overwriting existing files by adding a "unique-" prefix if needed
+- Optional start date parameter to specify when the sequence should begin
 
 ## Naming Pattern
 
@@ -37,7 +38,11 @@ Example:
    ```
 3. Run the script:
    ```bash
+   # Use today's date as the starting point
    ./renames_files.sh
+   
+   # Or specify a custom start date (YYYY-MM-DD format)
+   ./renames_files.sh 2024-04-16
    ```
 
 ## How It Works
@@ -47,14 +52,15 @@ Example:
    - The script itself
    - Files that already match the naming pattern
 3. Files are processed in order and assigned to:
-   - Today's date (first 3 files)
-   - Tomorrow's date (next 3 files)
-   - The day after tomorrow (next 3 files)
+   - Start date (first 3 files)
+   - Start date + 1 day (next 3 files)
+   - Start date + 2 days (next 3 files)
    And so on...
 
 ## Notes
 
-- The script uses the system's current date as the starting point
+- If no start date is provided, the script uses the system's current date
+- The start date must be in YYYY-MM-DD format
 - Each group of 3 files gets the same date
 - Times are assigned in sequence: 10AM, 01PM, 03PM
 - If a target filename already exists, the script adds a "unique-" prefix
@@ -71,7 +77,12 @@ file5.png
 file6.pdf
 ```
 
-Running the script will rename them to:
+Running the script with a start date:
+```bash
+./renames_files.sh 2024-04-16
+```
+
+Will rename them to:
 ```
 2024-04-16-10AM-post.jpg
 2024-04-16-01PM-post.png
@@ -86,4 +97,5 @@ Running the script will rename them to:
 If you encounter any issues:
 1. Make sure the script has execute permissions
 2. Ensure you're running it in the correct directory
-3. Check that you have files to rename that don't already match the pattern 
+3. Check that you have files to rename that don't already match the pattern
+4. If using a custom start date, ensure it's in YYYY-MM-DD format 

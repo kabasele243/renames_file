@@ -3,15 +3,32 @@
 # Script to rename files in the current directory through three posting times:
 # 10AM today, 01PM tomorrow, and 03PM the day after tomorrow
 
+# Check if start date is provided
+if [ $# -eq 1 ]; then
+    START_DATE="$1"
+    # Validate date format (YYYY-MM-DD)
+    if ! [[ "$START_DATE" =~ ^[0-9]{4}-[0-9]{2}-[0-9]{2}$ ]]; then
+        echo "Error: Invalid date format. Please use YYYY-MM-DD"
+        exit 1
+    fi
+else
+    # Use today's date if no start date provided
+    if [[ "$OSTYPE" == "darwin"* ]]; then
+        START_DATE=$(date +"%Y-%m-%d")
+    else
+        START_DATE=$(date +"%Y-%m-%d")
+    fi
+fi
+
 # Function to get date in YYYY-MM-DD format with offset
 get_date() {
     local days_offset=$1
     if [[ "$OSTYPE" == "darwin"* ]]; then
         # macOS date command
-        date -v +"$days_offset"d +"%Y-%m-%d"
+        date -j -f "%Y-%m-%d" -v +"$days_offset"d "$START_DATE" +"%Y-%m-%d"
     else
         # Linux date command
-        date -d "+$days_offset days" +"%Y-%m-%d"
+        date -d "$START_DATE +$days_offset days" +"%Y-%m-%d"
     fi
 }
 
