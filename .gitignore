@@ -1,0 +1,48 @@
+# Shell script specific
+*.log
+*.tmp
+*.bak
+*.swp
+*~
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# IDE and editor files
+.idea/
+.vscode/
+*.sublime-workspace
+*.sublime-project
+
+# Backup files
+*.backup
+*.orig
+*.rej
+
+# Temporary files
+tmp/
+temp/
+
+# Log files
+logs/
+*.log.*
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Test coverage
+coverage/
+.coverage
+htmlcov/
+
+# System Files
+desktop.ini
+$RECYCLE.BIN/
